@@ -112,7 +112,7 @@ library(edgeR)
 
 
 
-dreamletCompareClusters_edgeR <- function(pb, assays, method = c("fixed", "random", "none"), formula = ~0, collapse = TRUE, min.cells = 10, min.prop=0.4,  min.count = 10, min.samples = 4, isCounts = TRUE, normalize.method = "TMM", robust = FALSE, quiet = FALSE, contrasts = c(compare = paste("cellClustertest - cellClusterbaseline")), BPPARAM = SerialParam(), errorsAsWarnings = FALSE, useProcessOneAssay_edgeR = FALSE, ...) {
+dreamletCompareClusters_edgeR_with_calcNormFactors <- function(pb, assays, method = c("fixed", "random", "none"), formula = ~0, collapse = TRUE, min.cells = 10, min.prop=0.4,  min.count = 10, min.samples = 4, isCounts = TRUE, normalize.method = "TMM", robust = FALSE, quiet = FALSE, contrasts = c(compare = paste("cellClustertest - cellClusterbaseline")), BPPARAM = SerialParam(), errorsAsWarnings = FALSE, useProcessOneAssay_edgeR = FALSE, ...) {
   method <- match.arg(method)
   formula <- as.formula(formula)
 
@@ -525,7 +525,7 @@ dreamletCompareClusters_edgeR <- function(pb, assays, method = c("fixed", "rando
   returnFit
 }
 
-environment(dreamletCompareClusters_edgeR) <- rlang::new_environment(parent = environment(dreamlet::dreamletCompareClusters))
+environment(dreamletCompareClusters_edgeR_with_calcNormFactors) <- rlang::new_environment(parent = environment(dreamlet::dreamletCompareClusters))
 
 
 
