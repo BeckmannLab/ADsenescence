@@ -44,7 +44,7 @@ library(dreamlet)
 library(edgeR)
 
 
-processOneAssay_edgeR <- function(y, formula, data, n.cells, min.cells = 5, min.count = 2, min.samples = 4, min.prop = .4, min.total.count = 15, isCounts = TRUE, normalize.method = "TMM", span = "auto", quiet = TRUE, weights = NULL, rescaleWeightsAfter = FALSE, BPPARAM = SerialParam(), ...) {
+processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells, min.cells = 5, min.count = 2, min.samples = 4, min.prop = .4, min.total.count = 15, isCounts = TRUE, normalize.method = "TMM", span = "auto", quiet = TRUE, weights = NULL, rescaleWeightsAfter = FALSE, BPPARAM = SerialParam(), ...) {
   checkFormula(formula, data)
 
   if (is.null(n.cells)) {
@@ -148,4 +148,4 @@ processOneAssay_edgeR <- function(y, formula, data, n.cells, min.cells = 5, min.
   geneExpr
 }
 
-environment(processOneAssay_edgeR) <- rlang::new_environment(parent = environment(dreamlet:::processOneAssay))
+environment(processOneAssay_edgeR_with_calcNormFactors) <- rlang::new_environment(parent = environment(dreamlet:::processOneAssay))
