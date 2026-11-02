@@ -517,6 +517,11 @@ dreamletCompareClusters_edgeR_with_calcNormFactors <- function(pb, assays, metho
       colnames(design)[1:2]=c("baseline","test")
       colnames(design)=make.names(colnames(design))
 
+      if (!is.null(save_dir)) {
+        dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
+        saveRDS(vobj, file.path(save_dir, "geneExpr_after_pair_filter.rds"))
+      }
+
       fit = glmQLFit(vobj,design)
       contrast=makeContrasts(test - baseline, levels=design)
       qlfFit=glmQLFTest(fit,contrast=contrast)
