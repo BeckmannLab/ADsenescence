@@ -122,10 +122,6 @@ processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells
   y = estimateDisp(y,design)
   geneExpr=y
   
-  if (!is.null(save_path)) {
-  dir.create(save_path, recursive = TRUE, showWarnings = FALSE)
-  saveRDS(geneExpr, file.path(save_path, "geneExpr_before_pair_filter.rds"))
-}
   # geneExpr <- voomWithDreamWeights(y[keep, ], formula, data, 
   #   weights = precWeights, 
   #   rescaleWeightsAfter = rescaleWeightsAfter, BPPARAM = BPPARAM, 
@@ -142,6 +138,11 @@ processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells
   # save formula used after dropping constant terms
   if (!is.null(geneExpr)) geneExpr$formula <- formula
   if (!is.null(geneExpr)) geneExpr$isCounts <- isCounts
+
+  if (!is.null(save_path)) {
+  dir.create(save_path, recursive = TRUE, showWarnings = FALSE)
+  saveRDS(geneExpr, file.path(save_path, "geneExpr_before_pair_filter.rds"))
+  }
 
   # # geneExpr$E <- edgeR::cpm(y[rownames(geneExpr), ], log=TRUE, prior.count = 0.5)
   # tmp <- edgeR::cpm(y[rownames(geneExpr), ], log=TRUE, prior.count = 0.5)
