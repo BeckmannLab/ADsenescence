@@ -44,7 +44,7 @@ library(dreamlet)
 library(edgeR)
 
 
-processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells, min.cells = 5, min.count = 2, min.samples = 4, min.prop = .4, min.total.count = 15, isCounts = TRUE, normalize.method = "TMM", span = "auto", quiet = TRUE, weights = NULL, rescaleWeightsAfter = FALSE, BPPARAM = SerialParam(), ...) {
+processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells, min.cells = 5, min.count = 2, min.samples = 4, min.prop = .4, min.total.count = 15, isCounts = TRUE, normalize.method = "TMM", span = "auto", quiet = TRUE, weights = NULL, rescaleWeightsAfter = FALSE, BPPARAM = SerialParam(),save_path = NULL, ...) {
   checkFormula(formula, data)
 
   if (is.null(n.cells)) {
@@ -121,6 +121,11 @@ processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells
   # browser()
   y = estimateDisp(y,design)
   geneExpr=y
+
+  if (!is.null(save_path)) {
+  dir.create(dirname(save_path), recursive = TRUE, showWarnings = FALSE)
+  saveRDS(geneExpr, save_path)
+  }
   # geneExpr <- voomWithDreamWeights(y[keep, ], formula, data, 
   #   weights = precWeights, 
   #   rescaleWeightsAfter = rescaleWeightsAfter, BPPARAM = BPPARAM, 
