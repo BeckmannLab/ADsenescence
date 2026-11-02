@@ -121,10 +121,10 @@ processOneAssay_edgeR_with_calcNormFactors <- function(y, formula, data, n.cells
   # browser()
   y = estimateDisp(y,design)
   geneExpr=y
-
-  if (!is.null(save_path)) {
-  dir.create(dirname(save_path), recursive = TRUE, showWarnings = FALSE)
-  saveRDS(geneExpr, save_path)
+  
+  if (!is.null(save_dir)) {
+    dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
+    saveRDS(geneExpr, file.path(save_dir, "geneExpr_before_pair_filter.rds"))
   }
   # geneExpr <- voomWithDreamWeights(y[keep, ], formula, data, 
   #   weights = precWeights, 
