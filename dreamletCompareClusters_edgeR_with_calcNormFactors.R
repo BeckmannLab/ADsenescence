@@ -112,7 +112,7 @@ library(edgeR)
 
 
 
-dreamletCompareClusters_edgeR_with_calcNormFactors <- function(pb, assays, method = c("fixed", "random", "none"), formula = ~0, collapse = TRUE, min.cells = 10, min.prop=0.4,  min.count = 10, min.samples = 4, isCounts = TRUE, normalize.method = "TMM", robust = FALSE, quiet = FALSE, contrasts = c(compare = paste("cellClustertest - cellClusterbaseline")), BPPARAM = SerialParam(), errorsAsWarnings = FALSE, useProcessOneAssay_edgeR = FALSE, ...) {
+dreamletCompareClusters_edgeR_with_calcNormFactors <- function(pb, assays, method = c("fixed", "random", "none"), formula = ~0, collapse = TRUE, min.cells = 10, min.prop=0.4,  min.count = 10, min.samples = 4, isCounts = TRUE, normalize.method = "TMM", robust = FALSE, quiet = FALSE, contrasts = c(compare = paste("cellClustertest - cellClusterbaseline")), BPPARAM = SerialParam(), errorsAsWarnings = FALSE, useProcessOneAssay_edgeR = FALSE,save_path = NULL, ...) {
   method <- match.arg(method)
   formula <- as.formula(formula)
 
@@ -354,7 +354,7 @@ dreamletCompareClusters_edgeR_with_calcNormFactors <- function(pb, assays, metho
           isCounts = isCounts,
           normalize.method = normalize.method,
           quiet = quiet,
-          BPPARAM = BPPARAM, useProcessOneAssay_edgeR = TRUE, ...
+          BPPARAM = BPPARAM,save_path = save_path, useProcessOneAssay_edgeR = TRUE, ...
         )
       },
       error = function(e) {
